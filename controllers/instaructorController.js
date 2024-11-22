@@ -12,7 +12,7 @@ exports.signup=async(req,res)=>{
     if (!phoneRegex.test(Phone_number)) {
       return badRequestResponse(req,res,"Provide valid Phone Number");
     }
-        const user=await User.create({name:name,email:email,password:hashpassword,Phone_number:Phone_number,group_id:1})
+        const user=await User.create({name:name,email:email,password:hashpassword,Phone_number:Phone_number,group_id:3})
 
         if(!user) return badRequestResponse(req,res,"Something Went Wrong")
         
@@ -30,7 +30,7 @@ exports.loginEmail=async(req,res)=>{
         const{email,password}=req.body;
         const user=await UserService.userByEmail(email)
         const hash=await UserService.hashpassword(password);
-        console.log(user);
+        console,log(user);
         if(user.password!=hash) return badRequestResponse(req,res,"Invalid Password")
 
         const token=await authenticate.GenrateToken(user);
