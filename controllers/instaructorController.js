@@ -1,7 +1,7 @@
 const{badRequestResponse,okResponse,unauthorizedResponse}=require('../helpers/customMessage')
 const UserService=require('../Services/UserService')
 const User=require('../models/user')
-const authenticate=require('../middleware/authenticate')
+const authenticate=require('../middleware/Jwtauth')
 var otp;
 exports.signup=async(req,res)=>{
     try {
@@ -30,7 +30,7 @@ exports.loginEmail=async(req,res)=>{
         const{email,password}=req.body;
         const user=await UserService.userByEmail(email)
         const hash=await UserService.hashpassword(password);
-        console,log(user);
+        console.log(user);
         if(user.password!=hash) return badRequestResponse(req,res,"Invalid Password")
 
         const token=await authenticate.GenrateToken(user);
@@ -89,4 +89,9 @@ exports.verifyotp=async(req,res)=>{
         console.log(error)
         return badRequestResponse(req,res,error.message)
     }
+}
+
+exports.test=async(req,res)=>{
+    console.log("okkk")
+    return okResponse(req,res,"OKZZZ")
 }

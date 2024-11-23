@@ -4,7 +4,7 @@ const app=express();
 const PORT=process.env.PORT||8000
 const UserRoute=require("./routes/userRoute")
 const AdminRoutes=require('./routes/adminRoute')
-const instructorRoutes=require('./routes/adminRoute')
+const instructorRoutes=require('./routes/intructorRoutes')
 
 
 const sequelize = require('./config/database');

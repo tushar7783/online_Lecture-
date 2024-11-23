@@ -1,9 +1,11 @@
 const{unauthorizedResponse} =require('../helpers/customMessage')
-module.exports=class Token{
+const Jwtauth=require('./Jwtauth')
+
+class Token{
     async Autehticate(req,res,next){
        try {
             const bearerHearder = req.headers["authorization"];
-            const bearer=bearerHearder.split('')
+            const bearer=bearerHearder.split(' ')
             const token=bearer[1];
             if(token){
             const decode=await Jwtauth.VerifyToken(token);
@@ -20,3 +22,4 @@ module.exports=class Token{
     }
 }
 
+module.exports=new Token().Autehticate
