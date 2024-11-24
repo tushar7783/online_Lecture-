@@ -2,6 +2,8 @@ const{badRequestResponse,okResponse,unauthorizedResponse}=require('../helpers/cu
 const UserService=require('../Services/UserService')
 const User=require('../models/user')
 const authenticate=require('../middleware/Jwtauth')
+const path = require('path');
+
 var otp;
 exports.signup=async(req,res)=>{
     try {
@@ -88,6 +90,28 @@ exports.verifyotp=async(req,res)=>{
     } catch (error) {
         console.log(error)
         return badRequestResponse(req,res,error.message)
+    }
+}
+
+exports.uploadSingle=async(req,res)=>{
+    try {
+        console.log(req.file);
+        if (!req.file) {
+            return badRequestResponse(req,res,'No file uploaded!')
+          }
+          const fileDetails = {
+            name: req.file.filename,
+            path: path.join('/uploads', req.file.filename),
+            size: req.file.size,
+          };
+
+          if(fileDetails) return okResponse(req,res,`message: 'File uploaded successfully!',
+            file: ${fileDetails}`)
+        
+    } catch (error) {
+        console.log(error)
+        return badRequestResponse(req,res,error.message)
+
     }
 }
 

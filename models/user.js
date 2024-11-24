@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 const Group=require('./group')
+// const Course=require('./course')
 
 // Define the User model
 const User = sequelize.define('User', {
@@ -57,4 +58,7 @@ const User = sequelize.define('User', {
 // Define the relationship
 User.belongsTo(Group, { foreignKey: 'group_id' });
 Group.hasMany(User, { foreignKey: 'group_id' });
+
+// define the relationship
+// User.belongsTo()
 module.exports=User
